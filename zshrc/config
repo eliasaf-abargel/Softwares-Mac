@@ -1,0 +1,43 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+
+# Set name of the theme to load
+ZSH_THEME="powerlevel10k/powerlevel10k"
+
+# Load oh-my-zsh plugins
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
+
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+export EDITOR='nvim'
+export VISUAL='nvim'
+alias vim="nvim"
+alias vi="nvim"
+alias v="nvim"
+
+# Google Cloud SDK
+if [ -f '/Users/eliasafabargel/Downloads/google-cloud-sdk/path.zsh.inc' ]; then
+  . '/Users/eliasafabargel/Downloads/google-cloud-sdk/path.zsh.inc';
+fi
+
+if [ -f '/Users/eliasafabargel/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then
+  . '/Users/eliasafabargel/Downloads/google-cloud-sdk/completion.zsh.inc';
+fi
+
+export PATH="/usr/local/bin:$PATH"
+alias copilot="gh copilot"
+alias gcs="gh copilot suggest"
+alias gce="gh copilot explain"
+
+# Terraform completion
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /opt/homebrew/bin/terraform terraform
+
+# Homebrew shell environment
+eval "$(/opt/homebrew/bin/brew shellenv)"
