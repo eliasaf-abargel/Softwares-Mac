@@ -449,6 +449,11 @@ hash -d config=~/.config
 # FINAL SETUP
 # =============================================================================
 
+# Load Powerlevel10k configuration
+if [[ -f ~/.p10k.zsh ]]; then
+  source ~/.p10k.zsh
+fi
+
 # Load any additional custom configurations
 if [ -d ~/.zshrc.d ]; then
   for file in ~/.zshrc.d/*.zsh; do
@@ -456,10 +461,11 @@ if [ -d ~/.zshrc.d ]; then
   done
 fi
 
-# Welcome message (only show if not in instant prompt)
-if [[ -z $P9K_INSTANT_PROMPT ]]; then
-  echo "🚀 Advanced ZSH configuration loaded!"
-  echo "📦 Available tools: AWS, GCP, Azure, Docker, Kubernetes, Terraform"
-  echo "💡 Use 'switch-env' to change cloud environments"
-  echo "🔧 Use 'project' to auto-detect and setup projects"
-fi
+# Welcome message disabled for instant prompt compatibility
+# Uncomment the lines below if you want to see welcome messages when running source ~/.zshrc
+# if [[ -z $P9K_INSTANT_PROMPT ]]; then
+#   echo "🚀 Advanced ZSH configuration loaded!"
+#   echo "📦 Available tools: AWS, GCP, Azure, Docker, Kubernetes, Terraform"
+#   echo "💡 Use 'switch-env' to change cloud environments"
+#   echo "🔧 Use 'project' to auto-detect and setup projects"
+# fi
