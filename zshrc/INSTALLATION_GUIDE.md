@@ -1,314 +1,483 @@
-# 🚀 ZSH Advanced Configuration - Installation Guide
+# 🚀 Advanced ZSH Configuration - Complete Installation Guide
 
-## 📋 Prerequisites
+A comprehensive guide for setting up a production-ready ZSH environment with cloud-native development tools, enhanced productivity features, and a beautiful terminal experience.
 
-### 1. Install Homebrew (if not already installed)
+## 📋 Table of Contents
+
+1. [Prerequisites](#-prerequisites)
+2. [Quick Installation](#-quick-installation)
+3. [Manual Installation](#-manual-installation)
+4. [Post-Installation Setup](#-post-installation-setup)
+5. [Configuration Details](#-configuration-details)
+6. [Usage Examples](#-usage-examples)
+7. [Troubleshooting](#-troubleshooting)
+8. [Customization](#-customization)
+
+## 🎯 Prerequisites
+
+### System Requirements
+- **macOS** (10.15 or later recommended)
+- **Administrator privileges** for software installation
+- **Internet connection** for downloading tools and packages
+
+### Required Software
+- **Homebrew** (package manager)
+- **Git** (version control)
+- **Terminal application** (Terminal.app, iTerm2, Warp, VS Code, etc.)
+
+## ⚡ Quick Installation
+
+### Automated Setup (Recommended)
+```bash
+# 1. Navigate to the zshrc directory
+cd /path/to/your/zshrc
+
+# 2. Make setup script executable
+chmod +x setup.sh
+
+# 3. Run the automated installation
+./setup.sh
+
+# 4. Restart your terminal or reload configuration
+source ~/.zshrc
+```
+
+The automated script will:
+- ✅ Install all required tools and dependencies
+- ✅ Configure Oh My Zsh with Powerlevel10k theme
+- ✅ Set up cloud development environments
+- ✅ Install productivity plugins and tools
+- ✅ Create backup of existing configuration
+- ✅ Apply the new configuration automatically
+
+## 🔧 Manual Installation
+
+### Step 1: Install Homebrew
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-### 2. Install Oh My Zsh (if not already installed)
+### Step 2: Install Oh My Zsh
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-### 3. Install Powerlevel10k Theme
+### Step 3: Install Powerlevel10k Theme
 ```bash
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 ```
 
-## 🔧 Core Tools Installation
-
-### Development Tools
+### Step 4: Install Core Development Tools
 ```bash
-# Node.js and npm
-brew install node
+# Update Homebrew
+brew update
 
-# Python
-brew install python
+# Install programming languages and tools
+brew install node python go rust ruby openjdk
 
-# Go
-brew install go
+# Install cloud development tools
+brew install awscli google-cloud-sdk azure-cli terraform helm
 
-# Rust
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-
-# Ruby
-brew install ruby
-
-# Java
-brew install openjdk
-```
-
-### Cloud Tools
-```bash
-# AWS CLI
-brew install awscli
-
-# Google Cloud SDK
-brew install google-cloud-sdk
-
-# Azure CLI
-brew install azure-cli
-
-# Terraform
-brew install terraform
-
-# Helm
-brew install helm
-```
-
-### Container Tools
-```bash
-# Docker Desktop
+# Install container tools
+brew install kubectl kubectx
 brew install --cask docker
 
-# kubectl
-brew install kubectl
-
-# kubectx and kubens
-brew install kubectx
+# Install productivity tools
+brew install fzf fd bat ripgrep exa jq htop gh
 ```
 
-## 📦 Oh My Zsh Plugins Installation
-
-### Required Plugins
+### Step 5: Install Oh My Zsh Plugins
 ```bash
-# zsh-syntax-highlighting
+# Essential plugins
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-
-# zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-
-# zsh-history-substring-search
 git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
-
-# zsh-completions
 git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-completions
 ```
 
-### Optional but Recommended Plugins
+### Step 6: Install Additional Tools
 ```bash
-# fzf (fuzzy finder)
-brew install fzf
-
-# fd (fast directory traversal)
-brew install fd
-
-# bat (better cat)
-brew install bat
-
-# ripgrep (fast grep)
-brew install ripgrep
-
-# exa (better ls)
-brew install exa
-
-# jq (JSON processor)
-brew install jq
-
-# htop (process viewer)
-brew install htop
-```
-
-## 🎨 Additional Tools
-
-### Node Version Manager (nvm)
-```bash
+# Node Version Manager (nvm)
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+
+# Python virtual environment tools
+pip3 install virtualenv poetry
+
+# Rust (if not installed via Homebrew)
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
-### Python Virtual Environment
+### Step 7: Apply Configuration
 ```bash
-# pip is included with Python
-pip3 install virtualenv
-pip3 install poetry
+# Backup existing configuration
+cp ~/.zshrc ~/.zshrc.backup.$(date +%Y%m%d_%H%M%S)
+
+# Copy new configuration
+cp /path/to/your/zshrc/config ~/.zshrc
+
+# Create custom configuration directory
+mkdir -p ~/.zshrc.d
 ```
 
-### GitHub CLI
+## 🔧 Post-Installation Setup
+
+### 1. Configure Powerlevel10k
 ```bash
-brew install gh
+# Restart terminal or reload configuration
+source ~/.zshrc
+
+# Run Powerlevel10k configuration wizard
+p10k configure
 ```
 
-## 🔐 Cloud Configuration
+**Configuration Tips:**
+- Choose **Yes** for instant prompt
+- Select **Unicode** for character set
+- Choose **MesloLGS NF** or **JetBrainsMonoNL Nerd Font** for font
+- Enable **Git status** and **Cloud environment** segments
+- Customize colors to your preference
 
-### AWS Setup
+### 2. Install Nerd Fonts (Required for Icons)
 ```bash
-# Configure AWS CLI
+# Install Nerd Fonts
+brew install --cask font-jetbrains-mono-nerd-font
+brew install --cask font-meslo-lg-nerd-font
+```
+
+### 3. Configure Terminal Fonts
+
+**VS Code:**
+```json
+{
+    "terminal.integrated.fontFamily": "JetBrainsMonoNL Nerd Font"
+}
+```
+
+**Warp:**
+- Settings → Terminal → Font Family: `JetBrainsMonoNL Nerd Font`
+
+**IntelliJ IDEA:**
+- Settings → Editor → Font → Font Family: `JetBrainsMonoNL Nerd Font`
+
+**iTerm2:**
+- Preferences → Profiles → Text → Font: `JetBrainsMonoNL Nerd Font`
+
+### 4. Set Up Cloud Credentials
+
+**AWS Configuration:**
+```bash
 aws configure
-
-# Set up multiple profiles for different environments
 aws configure --profile dev
 aws configure --profile prod
 ```
 
-### GCP Setup
+**Google Cloud Configuration:**
 ```bash
-# Initialize gcloud
 gcloud init
-
-# Set up application default credentials
 gcloud auth application-default login
-
-# Create multiple configurations
 gcloud config configurations create dev
 gcloud config configurations create prod
 ```
 
-### Azure Setup
+**Azure Configuration:**
 ```bash
-# Login to Azure
 az login
-
-# Set subscription
-az account set --subscription <subscription-id>
+az account set --subscription <your-subscription-id>
 ```
 
-## 🎯 Quick Setup Script
+## 📋 Configuration Details
 
-Create a setup script to automate the installation:
+### What's Included
 
+#### 🎨 **Visual Enhancements**
+- **Powerlevel10k** theme with instant prompt
+- **Nerd Fonts** integration for rich icons
+- **Syntax highlighting** for commands
+- **Auto-suggestions** based on history
+- **Context-aware prompt** with environment indicators
+
+#### ☁️ **Cloud Development Tools**
+- **AWS CLI** with profile management
+- **Google Cloud SDK** with project switching
+- **Azure CLI** with subscription management
+- **Terraform** with workspace support
+- **Helm** for Kubernetes package management
+
+#### 🐳 **Container & Orchestration**
+- **Docker** and **Docker Compose** integration
+- **Kubernetes** with context management
+- **kubectx** and **kubens** for cluster switching
+- **Smart container management** functions
+
+#### 🛠️ **Development Workflow**
+- **Enhanced Git** aliases and functions
+- **Multi-language support** (Node.js, Python, Go, Rust)
+- **Project auto-detection** and setup
+- **Smart commit** and push functions
+
+#### 🔍 **Productivity Features**
+- **FZF** fuzzy finder integration
+- **Z** smart directory jumping
+- **History search** and substring search
+- **Auto-completion** for all major tools
+- **Custom aliases** for common operations
+
+### Key Functions
+
+#### Cloud Environment Management
 ```bash
-#!/bin/bash
+switch-env aws-dev      # Switch to AWS development
+switch-env gcp-prod     # Switch to GCP production
+switch-env azure-dev    # Switch to Azure development
 
-echo "🚀 Installing ZSH Advanced Configuration..."
-
-# Update Homebrew
-brew update
-
-# Install core tools
-echo "📦 Installing core tools..."
-brew install node python go rust ruby openjdk
-
-# Install cloud tools
-echo "☁️ Installing cloud tools..."
-brew install awscli google-cloud-sdk azure-cli terraform helm kubectl kubectx
-
-# Install additional tools
-echo "🛠️ Installing additional tools..."
-brew install fzf fd bat ripgrep exa jq htop gh
-
-# Install Oh My Zsh plugins
-echo "🔌 Installing Oh My Zsh plugins..."
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
-git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-completions
-
-# Install nvm
-echo "📦 Installing Node Version Manager..."
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-
-# Install Python tools
-echo "🐍 Installing Python tools..."
-pip3 install virtualenv poetry
-
-echo "✅ Installation complete!"
-echo "🔄 Please restart your terminal or run: source ~/.zshrc"
+cloud-resources aws     # List AWS resources
+cloud-resources gcp     # List GCP resources
+cloud-resources azure   # List Azure resources
 ```
 
-## 🔄 Post-Installation Steps
+#### Project Management
+```bash
+project                # Auto-detect and setup project
+mkcd directory-name    # Create directory and navigate
+smartcommit           # Smart commit with auto-message
+smartpush             # Smart push with upstream tracking
+```
 
-1. **Restart your terminal** or run `source ~/.zshrc`
-
-2. **Configure Powerlevel10k**:
-   ```bash
-   p10k configure
-   ```
-
-3. **Set up cloud credentials**:
-   - AWS: `aws configure`
-   - GCP: `gcloud init`
-   - Azure: `az login`
-
-4. **Create custom directory for additional configs**:
-   ```bash
-   mkdir -p ~/.zshrc.d
-   ```
-
-5. **Test the configuration**:
-   ```bash
-   # Test cloud tools
-   aws --version
-   gcloud --version
-   az --version
-   
-   # Test aliases
-   ll
-   gs
-   k version
-   ```
+#### Container Management
+```bash
+dmanage start         # Start Docker Compose services
+dmanage stop          # Stop Docker Compose services
+dmanage logs          # View Docker Compose logs
+kctx                  # Show Kubernetes context info
+```
 
 ## 🎯 Usage Examples
 
-### Cloud Environment Switching
+### Daily Development Workflow
+
 ```bash
-# Switch between cloud environments
-switch-env aws-dev
-switch-env gcp-prod
-switch-env azure-dev
+# 1. Start your day
+switch-env aws-dev     # Switch to development environment
+
+# 2. Navigate to project
+cd ~/projects/my-app
+project               # Auto-setup project dependencies
+
+# 3. Development workflow
+gs                    # Check git status
+ga .                  # Stage all changes
+smartcommit          # Commit with smart message
+smartpush            # Push to remote
+
+# 4. Container operations
+dmanage start        # Start development environment
+dmanage logs         # Monitor application logs
+
+# 5. Cloud operations
+cloud-resources aws  # Check AWS resources
 ```
 
-### Project Auto-Detection
+### Kubernetes Operations
+
 ```bash
-# Navigate to a project and auto-setup
-cd my-node-project
-project  # Will run npm install && npm run dev
+# Context management
+kctx                  # View current context
+kx production-cluster # Switch to production cluster
+kn monitoring         # Switch to monitoring namespace
+
+# Resource management
+kg pods               # List pods
+kd pod my-pod         # Describe pod
+kl my-pod             # Follow pod logs
 ```
 
-### Quick Resource Management
-```bash
-# List cloud resources
-cloud-resources aws
-cloud-resources gcp
-cloud-resources azure
+### Terraform Workflow
 
-# Docker management
-dmanage start
-dmanage logs
-dmanage stop
+```bash
+# Infrastructure management
+tfi                   # Initialize Terraform
+tfp                   # Plan changes
+tfa                   # Apply changes
+tfo                   # Show outputs
+tfs list              # List state resources
 ```
 
-### Kubernetes Context Management
-```bash
-# View current context
-kctx
+## 🔍 Troubleshooting
 
-# Switch contexts
-kx my-cluster
-kn my-namespace
+### Common Issues and Solutions
+
+#### Powerlevel10k Instant Prompt Warnings
+**Problem:** Warning about instant prompt during startup
+**Solution:**
+```bash
+# Check for commands that produce output in .zshrc
+# Ensure all output is wrapped in conditional blocks
+if [[ -z $P9K_INSTANT_PROMPT ]]; then
+    echo "This will only show when not using instant prompt"
+fi
 ```
 
-## 🔧 Troubleshooting
-
-### Plugin Issues
-If plugins don't work, ensure they're properly installed:
+#### Missing Icons in Terminal
+**Problem:** Icons appear as squares or missing characters
+**Solution:**
 ```bash
+# 1. Verify Nerd Fonts installation
+fc-list | grep -i "nerd"
+
+# 2. Configure terminal font
+# Use one of these font names:
+# - JetBrainsMonoNL Nerd Font
+# - MesloLGL Nerd Font
+# - MesloLGSDZ Nerd Font Mono
+```
+
+#### Plugin Not Working
+**Problem:** Plugin functionality not available
+**Solution:**
+```bash
+# 1. Verify plugin installation
 ls ~/.oh-my-zsh/custom/plugins/
+
+# 2. Check plugin name in config
+# Ensure exact plugin name matches directory name
+
+# 3. Reload configuration
+source ~/.zshrc
 ```
 
-### Completion Issues
-If completions don't work:
+#### Completion Issues
+**Problem:** Auto-completion not working
+**Solution:**
 ```bash
+# 1. Clear completion cache
 rm ~/.zcompdump*
+
+# 2. Restart ZSH
 exec zsh
+
+# 3. Verify completion initialization
+autoload -Uz compinit
+compinit
 ```
 
-### Path Issues
-If tools aren't found, check your PATH:
+#### Path Issues
+**Problem:** Commands not found
+**Solution:**
 ```bash
+# 1. Check PATH variable
 echo $PATH
+
+# 2. Verify tool installation
 which aws
 which gcloud
 which az
+
+# 3. Reload shell environment
+source ~/.zshrc
+```
+
+### Performance Optimization
+
+#### Slow Startup
+```bash
+# 1. Enable instant prompt (already configured)
+# 2. Profile startup time
+time zsh -i -c exit
+
+# 3. Identify slow plugins
+zsh -xv 2>&1 | grep -E "(plugin|source)" | head -20
+```
+
+#### Memory Usage
+```bash
+# Monitor ZSH memory usage
+ps aux | grep zsh
+
+# Optimize history settings
+# Reduce HISTSIZE if needed
+```
+
+## 🛠️ Customization
+
+### Adding Custom Aliases
+Create `~/.zshrc.d/custom-aliases.zsh`:
+```bash
+# Development aliases
+alias dev='cd ~/development'
+alias docs='cd ~/documents'
+
+# Tool-specific aliases
+alias mytool='my-custom-command'
+```
+
+### Adding Custom Functions
+Create `~/.zshrc.d/custom-functions.zsh`:
+```bash
+# Custom project setup
+myproject() {
+    echo "Setting up custom project..."
+    # Your custom logic here
+}
+
+# Custom deployment function
+deploy() {
+    echo "Deploying to $1..."
+    # Your deployment logic here
+}
+```
+
+### Modifying Cloud Profiles
+Edit the `switch-env` function in `~/.zshrc`:
+```bash
+switch-env() {
+    case $1 in
+        "my-aws-dev")
+            export AWS_PROFILE=my-dev-profile
+            export AWS_DEFAULT_REGION=us-west-2
+            echo "Switched to My AWS DEV environment"
+            ;;
+        # Add your custom profiles here
+    esac
+}
+```
+
+### Custom Prompt Segments
+Modify `~/.p10k.zsh` to add custom prompt segments:
+```bash
+# Add custom segment to prompt
+prompt_mysegment() {
+    p10k segment -f 208 -i '⭐' -t 'My Custom Info'
+}
 ```
 
 ## 📚 Additional Resources
 
+### Documentation
 - [Oh My Zsh Documentation](https://ohmyz.sh/)
 - [Powerlevel10k Documentation](https://github.com/romkatv/powerlevel10k)
+- [ZSH Documentation](https://zsh.sourceforge.io/Doc/)
+
+### Cloud Tools Documentation
 - [AWS CLI Documentation](https://docs.aws.amazon.com/cli/)
 - [Google Cloud SDK Documentation](https://cloud.google.com/sdk/docs)
 - [Azure CLI Documentation](https://docs.microsoft.com/en-us/cli/azure/)
 - [Terraform Documentation](https://www.terraform.io/docs)
-- [Kubernetes Documentation](https://kubernetes.io/docs/) 
+- [Kubernetes Documentation](https://kubernetes.io/docs/)
+
+### Community Resources
+- [ZSH Community](https://github.com/zsh-users)
+- [Oh My Zsh Community](https://github.com/ohmyzsh/ohmyzsh)
+- [Powerlevel10k Community](https://github.com/romkatv/powerlevel10k)
+
+---
+
+## 🎉 Congratulations!
+
+You now have a fully configured, production-ready ZSH environment with:
+- ✅ Enhanced visual experience with Powerlevel10k
+- ✅ Complete cloud development toolchain
+- ✅ Container and orchestration support
+- ✅ Productivity-boosting features
+- ✅ Professional development workflow
+
+**Happy coding! 🚀** 

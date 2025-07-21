@@ -1,8 +1,29 @@
 # =============================================================================
-# ZSH Configuration - Advanced Setup with Cloud Support
+# 🚀 Advanced ZSH Configuration
+# =============================================================================
+# 
+# A comprehensive, production-ready ZSH configuration designed for modern
+# cloud-native development workflows. This setup provides an enhanced terminal
+# experience with integrated support for AWS, GCP, Azure, Docker, Kubernetes,
+# and more.
+#
+# Features:
+# - Powerlevel10k theme with instant prompt
+# - Cloud development tools integration
+# - Container and orchestration support
+# - Enhanced productivity features
+# - Smart project detection and setup
+# - Professional development workflow
+#
+# Author: Advanced ZSH Configuration Suite
+# Version: 2.0.0
 # =============================================================================
 
+# =============================================================================
+# POWERLEVEL10K INSTANT PROMPT
+# =============================================================================
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# This enables instant prompt for faster startup times.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -11,14 +32,14 @@ fi
 # ENVIRONMENT VARIABLES
 # =============================================================================
 
-# Basic environment
+# Basic environment configuration
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export EDITOR='nvim'
 export VISUAL='nvim'
 export PAGER='less'
 
-# History configuration
+# History configuration for better command management
 export HISTSIZE=10000
 export SAVEHIST=10000
 export HISTFILE=~/.zsh_history
@@ -45,32 +66,31 @@ path=(
 # Path to your oh-my-zsh installation
 export ZSH="$HOME/.oh-my-zsh"
 
-# Theme
+# Theme configuration
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-# Advanced plugins for cloud development
+# Advanced plugins for cloud development and productivity
 plugins=(
+  # Core functionality
   git
   zsh-syntax-highlighting
   zsh-autosuggestions
+  history
+  history-substring-search
+  
+  # Container and orchestration
   docker
   docker-compose
   kubectl
   kubectx
+  
+  # Cloud development
   aws
   gcloud
   terraform
   helm
-  history
-  history-substring-search
-  extract
-  fzf
-  z
-  copypath
-  dirhistory
-  sudo
-  web-search
-  jsontools
+  
+  # Development tools
   node
   npm
   python
@@ -79,10 +99,21 @@ plugins=(
   poetry
   rust
   golang
+  
+  # System and utilities
+  extract
+  fzf
+  z
+  copypath
+  dirhistory
+  sudo
+  web-search
+  jsontools
   brew
   macos
 )
 
+# Load Oh My Zsh
 source $ZSH/oh-my-zsh.sh
 
 # =============================================================================
@@ -128,13 +159,13 @@ alias vi="nvim"
 alias v="nvim"
 alias code="code-insiders" 2>/dev/null || alias code="code"
 
-# System aliases
+# System navigation aliases
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
-# Git aliases
+# Git workflow aliases
 alias gs='git status'
 alias ga='git add'
 alias gc='git commit'
@@ -149,7 +180,7 @@ alias gf='git fetch'
 alias gd='git diff'
 alias gdc='git diff --cached'
 
-# Docker aliases
+# Docker management aliases
 alias d='docker'
 alias dc='docker-compose'
 alias dps='docker ps'
@@ -162,7 +193,7 @@ alias dcleanall='docker system prune -a -f'
 alias dimg='docker images'
 alias drm='docker rm $(docker ps -aq)'
 
-# Kubernetes aliases
+# Kubernetes workflow aliases
 alias k='kubectl'
 alias kg='kubectl get'
 alias kd='kubectl describe'
@@ -181,7 +212,7 @@ alias aws='aws'
 alias gcp='gcloud'
 alias az='az'
 
-# Terraform aliases
+# Terraform workflow aliases
 alias tf='terraform'
 alias tfi='terraform init'
 alias tfp='terraform plan'
@@ -190,7 +221,7 @@ alias tfd='terraform destroy'
 alias tfo='terraform output'
 alias tfs='terraform state'
 
-# Development aliases
+# Development language aliases
 alias py='python3'
 alias pip='pip3'
 alias node='node'
@@ -199,6 +230,8 @@ alias yarn='yarn'
 alias go='go'
 alias rust='rustc'
 alias cargo='cargo'
+
+# Enhanced file listing aliases
 alias ls='eza'
 alias ll='eza -la'
 alias la='eza -A'
@@ -213,7 +246,7 @@ mkcd() {
   mkdir -p "$1" && cd "$1"
 }
 
-# Search in history
+# Search in command history
 hist() {
   history | grep "$1"
 }
@@ -240,7 +273,7 @@ extract() {
   fi
 }
 
-# Smart commit function
+# Smart commit function with automatic message generation
 smartcommit() {
   local message=$1
   if [[ -z $message ]]; then
@@ -250,13 +283,13 @@ smartcommit() {
   git commit -m "$message"
 }
 
-# Smart push function
+# Smart push function with upstream tracking
 smartpush() {
   local branch=$(git branch --show-current)
   git push -u origin $branch
 }
 
-# Cloud environment switching
+# Cloud environment switching function
 switch-env() {
   case $1 in
     "aws-dev")
@@ -291,7 +324,7 @@ switch-env() {
   esac
 }
 
-# Project detection and setup
+# Smart project detection and setup
 project() {
   if [[ -f "package.json" ]]; then
     echo "Node.js project detected"
@@ -336,7 +369,7 @@ cloud-resources() {
   esac
 }
 
-# Kubernetes context info
+# Kubernetes context information display
 kctx() {
   echo "Current context: $(kubectl config current-context)"
   echo "Current namespace: $(kubectl config view --minify --output 'jsonpath={..namespace}')"
@@ -391,15 +424,15 @@ fi
 # KEY BINDINGS
 # =============================================================================
 
-# History search
+# History search bindings
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
-# Word navigation
+# Word navigation bindings
 bindkey '^[[1;5C' forward-word
 bindkey '^[[1;5D' backward-word
 
-# FZF integration
+# FZF integration configuration
 if command -v fzf &> /dev/null; then
   export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border --preview 'bat --style=numbers --color=always --line-range :500 {}'"
   export FZF_DEFAULT_COMMAND="fd --type f"
@@ -413,14 +446,14 @@ fi
 # Homebrew shell environment
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# GitHub Copilot CLI
+# GitHub Copilot CLI integration
 if command -v gh &> /dev/null; then
   alias copilot="gh copilot"
   alias gcs="gh copilot suggest"
   alias gce="gh copilot explain"
 fi
 
-# Node Version Manager (nvm)
+# Node Version Manager (nvm) configuration
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
@@ -428,10 +461,10 @@ export NVM_DIR="$HOME/.nvm"
 # Python virtual environments
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
-# Rust
+# Rust environment
 export PATH="$HOME/.cargo/bin:$PATH"
 
-# Go
+# Go environment
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
 
@@ -439,6 +472,7 @@ export PATH="$GOPATH/bin:$PATH"
 # CUSTOM DIRECTORY HASHES
 # =============================================================================
 
+# Quick navigation to common directories
 hash -d projects=~/Projects
 hash -d downloads=~/Downloads
 hash -d documents=~/Documents
@@ -457,7 +491,9 @@ fi
 # Load any additional custom configurations
 if [ -d ~/.zshrc.d ]; then
   for file in ~/.zshrc.d/*.zsh; do
-    source $file
+    if [ -f "$file" ]; then
+      source "$file"
+    fi
   done
 fi
 
